@@ -1,0 +1,1 @@
+# qu_guru_6_ziptest
