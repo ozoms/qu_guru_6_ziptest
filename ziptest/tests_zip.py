@@ -12,10 +12,10 @@ with zipfile.ZipFile('testzip.zip', mode="w") as archive:
     for file_path in directory.iterdir():
         archive.write(file_path, arcname=file_path.name)
 
+shutil.move('testzip.zip', directory)
+
 resources_zip_dir = os.path.join(resources_dir, 'testzip.zip')
 directory_testzip = pathlib.Path(resources_zip_dir)
-
-shutil.move('testzip.zip', directory)
 
 with zipfile.ZipFile(directory_testzip, mode="r") as archive:
     name_info = archive.namelist()
