@@ -15,9 +15,8 @@ with zipfile.ZipFile('testzip.zip', mode="w") as archive:
 shutil.move('testzip.zip', directory)
 
 resources_zip_dir = os.path.join(resources_dir, 'testzip.zip')
-directory_testzip = pathlib.Path(resources_zip_dir)
 
-with zipfile.ZipFile(directory_testzip, mode="r") as archive:
+with zipfile.ZipFile(resources_zip_dir, mode="r") as archive:
     name_info = archive.namelist()
 
 assert ['tests_data.csv', 'tests_doc.pdf', 'tests_table.xlsx'] == name_info
