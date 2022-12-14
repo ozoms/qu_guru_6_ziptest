@@ -5,7 +5,7 @@ import os
 import shutil
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
-resources_dir = os.path.join(current_dir, 'resources')
+resources_dir = os.path.join(current_dir, '../resources')
 directory = pathlib.Path(resources_dir)
 
 with zipfile.ZipFile('testzip.zip', mode="w") as archive:
