@@ -1,8 +1,10 @@
-#from zipfile import ZipFile
 import pathlib
 import zipfile
 import os
 import shutil
+import csv
+from PyPDF2 import PdfReader
+from openpyxl import load_workbook
 
 current_dir = os.path.abspath(os.path.dirname(__file__))
 resources_dir = os.path.join(current_dir, '../resources')
@@ -16,7 +18,17 @@ shutil.move('testzip.zip', directory)
 
 resources_zip_dir = os.path.join(resources_dir, 'testzip.zip')
 
-with zipfile.ZipFile(resources_zip_dir, mode="r") as archive:
-    name_info = archive.namelist()
+zipfile.ZipFile(resources_zip_dir).extractall()
 
-assert ['tests_data.csv', 'tests_doc.pdf', 'tests_table.xlsx'] == name_info
+text = PdfReader('tests_doc.pdf').pages[0].extract_text()
+assert '1 a' in text
+
+with open('tests_data.csv') as csvfile:
+    csvfile = csv.reader(csvfile)
+    assert ['1', 'a'] in csvfile
+    #for r in csvfile:
+        #print(r)
+
+workbook = load_workbook('tests_table.xlsx')
+sheet = workbook.active
+assert 'a' == sheet.cell(row=1, column=2).value
