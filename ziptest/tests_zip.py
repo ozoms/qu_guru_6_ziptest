@@ -26,8 +26,6 @@ assert '1 a' in text
 with open('tests_data.csv') as csvfile:
     csvfile = csv.reader(csvfile)
     assert ['1', 'a'] in csvfile
-    #for r in csvfile:
-        #print(r)
 
 workbook = load_workbook('tests_table.xlsx')
 sheet = workbook.active
